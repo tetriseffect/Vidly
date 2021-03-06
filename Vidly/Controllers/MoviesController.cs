@@ -34,6 +34,11 @@ namespace Vidly.Controllers
             return View("MovieForm");
         }
 
+        public ViewResult Save()
+        {
+            return View();
+        }
+
         //Main page. The Genre inclues it on the page so you can display it in the chart
         public ViewResult Index()
         {
