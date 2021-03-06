@@ -28,6 +28,12 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
+        // Added with Exercise, action for creating new movie. 
+        public ViewResult New()
+        {
+            return View("MovieForm");
+        }
+
         //Main page. The Genre inclues it on the page so you can display it in the chart
         public ViewResult Index()
         {
