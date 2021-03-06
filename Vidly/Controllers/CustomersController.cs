@@ -57,7 +57,7 @@ namespace Vidly.Controllers
 
         public ViewResult Index()
         {
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList(); //This Customers is from the Dbset.It's all customers. Search "Customers"
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList(); //This Customers is from the Dbset.It's all customers. Search "Customers".
 
             return View(customers);
         }
