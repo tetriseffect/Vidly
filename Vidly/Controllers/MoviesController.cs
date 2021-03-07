@@ -28,12 +28,20 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // Added with Exercise, action for creating new movie. 
+        // Added with Exercise, action for creating new movie. When button is clicked, take them to New MovieForm page.
         public ViewResult New()
         {
-            return View("MovieForm");
+            // Create Dbset in Initial Models for Genre, then came here and made a variable which is a list of genres. Initilize the view model and set.
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+
+            return View("MovieForm", viewModel);
         }
 
+        // Need to add HTML Post here I think? See customer. Added with exercise.
         public ViewResult Save()
         {
             return View();
