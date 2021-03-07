@@ -41,10 +41,14 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
-        // Need to add HTML Post here I think? See customer. Added with exercise.
-        public ViewResult Save()
+        //  Added with exercise. HttpPost becuase it's saving the form
+        [HttpPost]
+        public ActionResult Create(Movie movie)
         {
-            return View();
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
         }
 
         //Main page. The Genre inclues it on the page so you can display it in the chart
