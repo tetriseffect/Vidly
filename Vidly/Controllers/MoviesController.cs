@@ -61,7 +61,7 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(Movie movie)
         {
-
+            // If movie id is 0, it means it's an new movie. Otherwise, update it
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
@@ -70,9 +70,15 @@ namespace Vidly.Controllers
 
             else
             {
-                // TODO
+                // movieinDb is the movie in the db which matches the ID given by user clicking on the movie
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberInStock = movie.NumberInStock;
             }
-           
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Movies");
