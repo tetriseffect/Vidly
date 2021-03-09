@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
-using Vidly.Controllers;
 using System.Data.Entity;
 
 
@@ -41,16 +40,44 @@ namespace Vidly.Controllers
             return View("MovieForm", viewModel);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("MovieForm", viewModel); 
+        }
+
+
         //  Added with exercise. HttpPost becuase it's saving the form
         [HttpPost]
-        public ActionResult Create(Movie movie)
+        public ActionResult Save(Movie movie)
         {
-            movie.DateAdded = DateTime.Now;
-            _context.Movies.Add(movie);
+
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+
+            else
+            {
+                // TODO
+            }
+           
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Movies");
         }
+
 
         //Main page. The Genre inclues it on the page so you can display it in the chart
         public ViewResult Index()
