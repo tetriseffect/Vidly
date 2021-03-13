@@ -61,6 +61,18 @@ namespace Vidly.Controllers
         [HttpPost]
         public ActionResult Save(Movie movie)
         {
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel
+                {
+                    Movie = movie,
+                    Genres = _context.Genres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
             // If movie id is 0, it means it's an new movie. Otherwise, update it
             if (movie.Id == 0)
             {
