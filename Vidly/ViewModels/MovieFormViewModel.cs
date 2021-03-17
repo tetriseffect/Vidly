@@ -22,7 +22,5 @@ namespace Vidly.ViewModels
                 return "New Movie";
             }
         }
-
-        // add logic for dynamically setting title, then set it in your view
     }
 }
