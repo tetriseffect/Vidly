@@ -60,6 +60,7 @@ namespace Vidly.Controllers
 
         //  Added with exercise. HttpPost becuase it's saving the form
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
 
