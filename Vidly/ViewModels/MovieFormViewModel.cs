@@ -18,11 +18,9 @@ namespace Vidly.ViewModels
         [StringLength(255)]
         public string Name { get; set; }
 
-
         [Display(Name = "Genre")]
         [Required]
         public byte? GenreId { get; set; }
-
 
         [Display(Name = "Release Date")]
         [Required]
