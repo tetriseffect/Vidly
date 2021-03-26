@@ -46,13 +46,56 @@ namespace Vidly.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
+            // Add the new customer to the db, then save
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
             return customer;
-            
         }
 
+
+        // PUT /api/customers/1 (Updating a customer)
+        [HttpPut]
+        public void UpdateCustomer(int id, Customer customer)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+
+            // Get the customer in the db
+            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            // Check if id given by customer in invalid
+            if (customerInDb == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            customerInDb.Name = customer.Name;
+            customerInDb.Birthday = customer.Birthday;
+            customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            customerInDb.MembershipTypeId = customer.MembershipTypeId;
+
+            _context.SaveChanges();
+        }
+
+        // DELETE /api/customers/1 (Deleting a customer)
+        [HttpDelete]
+        public void DeleteCustomer(int id)
+        {
+            // Get the customer in the db
+            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            // Check if id given by customer in invalid
+            if (customerInDb == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            _context.Customers.Remove(customerInDb);
+            _context.SaveChanges();
+        }
 
     }
 }
