@@ -68,6 +68,18 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
         }
 
+        // DELETE /api/movies/1. Delete a movie
+        [HttpDelete]
+        public void DeleteMovie(int id)
+        {
+            var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
 
+            if (movieInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            _context.Movies.Remove(movieInDb);
+
+            _context.SaveChanges();
+        }
     }
 }
