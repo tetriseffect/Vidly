@@ -49,7 +49,7 @@ namespace Vidly.Controllers.Api
         }
 
         // PUT /api/movies/1. Update a movie
-
+        [HttpPut]
         public void UpdateMovie(int id, Movie movie)
         {
             if (!ModelState.IsValid)
@@ -64,6 +64,10 @@ namespace Vidly.Controllers.Api
             movieInDb.ReleaseDate = movie.ReleaseDate;
             movieInDb.GenreId = movie.GenreId;
             movieInDb.NumberInStock = movie.NumberInStock;
+
+            _context.SaveChanges();
         }
+
+
     }
 }
