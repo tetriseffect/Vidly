@@ -35,7 +35,7 @@ namespace Vidly.Controllers.Api
             return movie;
         }
 
-        // POST /api/customers
+        // POST /api/movies. Create a movie
         [HttpPost]
         public Movie CreateMovie (Movie movie)
         {
@@ -46,6 +46,24 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
 
             return movie;
+        }
+
+        // PUT /api/movies/1. Update a movie
+
+        public void UpdateMovie(int id, Movie movie)
+        {
+            if (!ModelState.IsValid)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movieInDb == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            movieInDb.Name = movie.Name;
+            movieInDb.ReleaseDate = movie.ReleaseDate;
+            movieInDb.GenreId = movie.GenreId;
+            movieInDb.NumberInStock = movie.NumberInStock;
         }
     }
 }
