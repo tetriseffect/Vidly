@@ -74,7 +74,7 @@ namespace Vidly.Controllers.Api
             // Get the customer in the db
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            // Check if id given by customer in invalid
+            // Check if id given by customer in invalid.
             if (customerInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
