@@ -26,14 +26,14 @@ namespace Vidly.Controllers.Api
         }
 
         // GET api/movies/1. Get a single movie
-        public MovieDto GetMovie(int id)
+        public IHttpActionResult GetMovie(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
 
             if (movie == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<Movie, MovieDto>(movie);
+            return Ok(Mapper.Map<Movie, MovieDto>(movie));
         }
 
         // POST /api/movies. Create a movie
