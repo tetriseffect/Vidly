@@ -66,11 +66,11 @@ namespace Vidly.Controllers.Api
 
         // PUT /api/customers/1 (Updating a customer)
         [HttpPut]
-        public void UpdateCustomer(int id, CustomerDto customerDto)
+        public IHttpActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
             }
 
             // Get the customer in the db
@@ -79,13 +79,15 @@ namespace Vidly.Controllers.Api
             // Check if id given by customer in invalid.
             if (customerInDb == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
 
             // Removed '<CustomerDto, Customer>' after .Map, because the compiler can infer from the source and target types from the two objects passed to the method.
             Mapper.Map(customerDto, customerInDb);
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE /api/customers/1 (Deleting a customer)
