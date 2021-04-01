@@ -90,7 +90,7 @@ namespace Vidly.Controllers.Api
 
         // DELETE /api/customers/1 (Deleting a customer)
         [HttpDelete]
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
             // Get the customer in the db
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -98,11 +98,13 @@ namespace Vidly.Controllers.Api
             // Check if id given by customer in invalid
             if (customerInDb == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             }
 
             _context.Customers.Remove(customerInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
 
     }
