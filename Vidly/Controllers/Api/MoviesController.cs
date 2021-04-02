@@ -20,9 +20,11 @@ namespace Vidly.Controllers.Api
         }
 
         // GET /api/movies. Get a list of movies
-        public IEnumerable<MovieDto> GetMovies()
+        public IHttpActionResult GetMovies()
         {
-            return _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            var movieDtos = _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+
+            return Ok(movieDtos);
         }
 
         // GET api/movies/1. Get a single movie
@@ -55,20 +57,21 @@ namespace Vidly.Controllers.Api
 
         // PUT /api/movies/1. Update a movie
         [HttpPut]
-        public void UpdateMovie(int id, MovieDto movieDto)
+        public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
 
             if (movieInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-
+                return NotFound();
 
             Mapper.Map<MovieDto, Movie>(movieDto, movieInDb);
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELETE /api/movies/1. Delete a movie
