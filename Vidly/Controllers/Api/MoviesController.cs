@@ -38,7 +38,7 @@ namespace Vidly.Controllers.Api
             return Ok(Mapper.Map<Movie, MovieDto>(movie));
         }
 
-        // POST /api/movies. Create a movie
+        // POST /api/movies. Create a movie.
         [HttpPost]
         public IHttpActionResult CreateMovie (MovieDto movieDto)
         {
