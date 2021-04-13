@@ -14,11 +14,12 @@
 <br></br>
 
 
-<table class="table table-bordered table-hover">
+<table id="movies" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Movie</th>
             <th>Genre</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +28,31 @@
             <tr>
                 <td>@Html.ActionLink(movie.Name, "Edit", "Movies", new { id = movie.Id }, null)</td>
                 <td>@movie.Genre.Name</td>
+                <td>
+                    <button data-movie-id="@movie.Id" class="btn-link js-delete">Delete</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#movies .js-delete").on("click", function () {
+                var button = $(this);
+
+                if (confirm("You sure you want to delete????")) {
+                    $.ajax({
+                        url: "/api/movies/" + button.attr("data-movie-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            });
+        });
+    </script>    
+}
