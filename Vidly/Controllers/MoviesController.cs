@@ -100,10 +100,7 @@ namespace Vidly.Controllers
         //Main page. The Genre inclues it on the page so you can display it in the chart
         public ViewResult Index()
         {
-            // Use _context var to access the DB
-            var movies = _context.Movies.Include(c => c.Genre).ToList();
-
-            return View(movies);
+            return View();
         }
 
         // Details page. Include Genre since it's a seperate table
