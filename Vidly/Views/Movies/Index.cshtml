@@ -44,7 +44,7 @@
                     },
 
                     {
-                        data: "name"
+                        data: "genre.name"
 
                     },
 
@@ -54,16 +54,15 @@
                             return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
                         }
                     }
-
                 ]
             });
 
 
 
-            $("#movies").on("click", "js-delete", function () {
+            $("#movies").on("click", ".js-delete", function () {
                 var button = $(this);
 
-                bootbox.confirm("YO! Are you sure you want to delete this customer??", function (result) {
+                bootbox.confirm("YO! Are you sure you want to delete this movie??", function (result) {
                     if (result) {
                         $.ajax({
                             url: "/api/movies/" + button.attr("data-movie-id"),
