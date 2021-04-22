@@ -28,6 +28,7 @@ namespace Vidly.Controllers
         }
 
         // Added with Exercise, action for creating new movie. When button is clicked, take them to New MovieForm page.
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ViewResult New()
         {
             // Create Dbset in Initial Models for Genre, then came here and made a variable which is a list of genres. Initilize the view model and set.
@@ -100,7 +101,10 @@ namespace Vidly.Controllers
         //Main page. The Genre inclues it on the page so you can display it in the chart
         public ViewResult Index()
         {
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
+            
+            return View("ReadOnlyList");
         }
 
         // Details page. Include Genre since it's a seperate table
