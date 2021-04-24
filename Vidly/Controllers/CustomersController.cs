@@ -14,7 +14,7 @@ namespace Vidly.Controllers
 
         private ApplicationDbContext _context;
 
-        public CustomersController() //Ctor whic initilizes the above
+        public CustomersController() //Ctor which initilizes the above
         {
             _context = new ApplicationDbContext();
         }
