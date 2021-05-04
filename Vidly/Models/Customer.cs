@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations; // Added to use REQUIRED line
+using System.ComponentModel.DataAnnotations; // Added to use REQUIRED line.
 
 namespace Vidly.Models
 {
