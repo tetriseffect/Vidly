@@ -14,9 +14,8 @@ namespace Vidly.Controllers
         // GET: Test123
         public ActionResult Index()
         {
-            var x = new Testing { Word = "cheesecake" };
 
-            return View(x);
+            return View();
         }
 
         public ActionResult Details1()
