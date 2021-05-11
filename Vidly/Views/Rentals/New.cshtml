@@ -27,8 +27,11 @@
     <script>
         $(document).ready(function () {
 
-            var vm = {};
+            var vm = {
+                movieIds: []
+            };
 
+            // Customers
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -48,6 +51,27 @@
                 limit: 1000
             }).on("typeahead:select", function (e, customer) {
                vm.customerId = customer.id
+            });
+
+            // Movies
+            var movies = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/movies?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            $('#movie').typeahead({
+                minLength: 3,
+                highlight: true,
+            }, {
+                name: 'movies',
+                display: 'name',
+                source: movies,
+                limit: 1000
+            }).on("typeahead:select", function (e, movie) {
+                vm.moviesId = movies.id
             });
         });
     </script>    
