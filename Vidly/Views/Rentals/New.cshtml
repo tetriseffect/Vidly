@@ -91,7 +91,7 @@
                 vm.movieIds.push(movie.id);
             });
 
-            //Ensure a valid customer name is entered, and user enters one movie
+            //Ensure a valid customer name is entered, and user enters one movie.
             $.validator.addMethod("validCustomer", function () {
                 return vm.customerId && vm.customerId !== 0;
             }, "Please select a valid customer!!!");
