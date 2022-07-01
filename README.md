@@ -6,5 +6,5 @@ Tech stack:
 
 C# .NET
 Entity Framework  
-HTML/CSS/JS  
+HTML/CSS/JS/jQuery 
 Bootstrap  
