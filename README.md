@@ -4,7 +4,8 @@ Vidly is a MVC Application for use by Video Rental Stores, or can be customized 
 
 Tech stack:
 
-C# / Entity Framework
-Bootstrap
+C#  
+Entity Framework  
+Bootstrap  
 HTML/CSS/JS/jQuery 
   
