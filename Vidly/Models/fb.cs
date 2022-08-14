@@ -24,6 +24,8 @@ namespace Vidly.Models
             {
                 return "Buzz";
             }
+
+            return number.ToString();
         }
     }
 }
