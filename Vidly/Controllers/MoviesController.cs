@@ -21,7 +21,7 @@ namespace Vidly.Controllers
             _context = new ApplicationDbContext();
         }
 
-        // Dispose, just gotta do this
+        // Dispose
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
