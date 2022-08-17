@@ -12,7 +12,7 @@ namespace Vidly.Models
         {
             if ((number % 3 == 0) && (number % 5 == 0))
             {
-                return "FizzBuzz";
+                return "FizzBuzz!";
             }
 
             if (number % 3 == 0)
