@@ -100,7 +100,7 @@ namespace Vidly.Controllers
         }
 
 
-        //Main page. The Genre inclues it on the page so you can display it in the chart
+        //Main page. The Genre inclues it on the page so you can display it in the chart.
         public ViewResult Index()
         {
             if (User.IsInRole(RoleName.CanManageMovies))
